@@ -1,23 +1,43 @@
 // this is used in search and on the main page to show people's profiles
 
 import Card from 'react-bootstrap/Card';
-import Image from 'react-bootstrap/Image'
-import Stack from 'react-bootstrap/Row';
+import Button from 'react-bootstrap/Button';
+import Container from 'react-bootstrap/Container';
+import Stack  from 'react-bootstrap/Stack';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Image from '../assets/fake_person.png';
+
 
 function Person()
 {
     return (
-    <Card style={{width: '14rem'}}>
-        <Card.Img variant='top' src='../assets/react.svg' />
+    <Card style={{width: '20rem'}} data-bs-theme='dark'>
+        <Card.Img variant='top' src={Image} />
         <Card.Body>
-            <Card.Text>
-                Helllo!
-            </Card.Text>
-            <Card.Title>
-                John Doe
-            </Card.Title>
+            <Stack>
+                <Card.Title>
+                    John Doe
+                </Card.Title>
+                <Card.Text>
+                    looking for:
+                </Card.Text>
+                <Stack direction='horizontal' style={{overflowX: "scroll", overflowY: 'hidden', width: '100%', display: 'flex', gap: '5px', paddingBottom: '5px'}}>
+                    <Button style={{flex: '0 0 auto'}}>guitarist</Button>
+                    <Button style={{flex: '0 0 auto'}}>drummer</Button>
+                    <Button style={{flex: '0 0 auto'}}>guitarist</Button>
+                    <Button style={{flex: '0 0 auto'}}>drummer</Button>
+                    <Button style={{flex: '0 0 auto'}}>guitarist</Button>
+                    <Button style={{flex: '0 0 auto'}}>drummer</Button>
+                </Stack>
+                <Card.Text>
+                    skills:
+                </Card.Text>
+                <Stack direction='horizontal' style={{overflowX: "scroll", overflowY: 'hidden', width: '100%', display: 'flex', gap: '5px', paddingBottom: '5px'}}>
+                    <Button style={{flex: '0 0 auto'}}>guitar 3 years</Button>
+                    <Button style={{flex: '0 0 auto'}}>drums 1 year</Button>
+                </Stack>
+            </Stack>
         </Card.Body>
     </Card>);
 };

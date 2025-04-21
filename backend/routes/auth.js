@@ -45,6 +45,45 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// Search Users
+router.post('/search', async (req, res) => {
+  const { keyword } = req.body;
+
+  try {
+    const users = await User.find({
+      $or: [
+        { firstName: { $regex: keyword, $options: 'i' } },
+        { lastName: { $regex: keyword, $options: 'i' } },
+        { musicBackground: { $regex: keyword, $options: 'i' } }
+      ]
+    }).select('-password');
+
+    res.status(200).json(users);
+  } catch (err) {
+    res.status(500).json({ error: 'Search failed' });
+  }
+});
+
+// Mark interest in another user
+router.post('/interested', async (req, res) => {
+  const { userId, targetUserId } = req.body;
+
+  try {
+    const user = await User.findById(userId);
+    if (!user) return res.status(404).json({ error: 'User not found' });
+
+    if (!user.interested.includes(targetUserId)) {
+      user.interested.push(targetUserId);
+      await user.save();
+    }
+
+    res.status(200).json({ message: 'User marked as interested' });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to mark interest' });
+  }
+});
+
+
 // Logout
 router.post('/logout', (req, res) => {
   res.status(200).json({ message: 'User logged out successfully' });

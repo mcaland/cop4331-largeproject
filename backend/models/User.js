@@ -1,20 +1,12 @@
 const mongoose = require('mongoose');
 
 const userSchema = new mongoose.Schema({
-  firstName: String,
-  lastName: String,
-  phone: String,
-  email: { type: String, unique: true },
-  password: String,
-  musicBackground: String,
-  interested: [mongoose.Schema.Types.ObjectId],
-  pastCollabs: [mongoose.Schema.Types.ObjectId],
-  notifications: [
-    {
-      fromUserId: mongoose.Schema.Types.ObjectId,
-      read: { type: Boolean, default: false }
-    }
-  ]
+    firstName: { type: String, required: true },
+    lastName: { type: String, required: true },
+    phone: { type: String, required: true },
+    email: { type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    musicBackground: { type: String, required: true }
 });
 
 module.exports = mongoose.model('User', userSchema);

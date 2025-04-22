@@ -8,23 +8,25 @@ import Login from './pages/Login';
 import Register from './pages/Register';
 import Me from './pages/Me';
 import User from './pages/User';
-import ProfileSetup from './components/ProfileSetup';
+import Setup from './pages/Setup';
 
 function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <body data-bs-theme="dark">
+    <div style={{width: '100vw', height: '100vh'}}>
       <Router>
         <Routes>
+        <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
+          <Route path="/onboarding" element={<Setup />} />
           <Route path="/me" element={<Me />} />
         </Routes>
       </Router>
 
-      <Home />
-    </body>
+      <></>
+    </div>
   )
 }
 

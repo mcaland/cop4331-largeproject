@@ -25,9 +25,9 @@ function LoginForm()
                                 <Form.Control type='password' placeholder='strongPassword'/>
                             </FloatingLabel>
 
-                            <Button id='signUpButton'>Log in</Button>
+                            <Button id='loginButton' href='/home'>Log in</Button>
 
-                            <Form.Label muted>Don't have an account? <Button variant='link' style={{padding: '0px'}}>Sign up here.</Button></Form.Label>
+                            <Form.Label muted>Don't have an account? <Button variant='link' style={{padding: '0px'}} href='/register'>Sign up here.</Button></Form.Label>
                         </Stack>
                     </InputGroup>
                 </Card.Body>

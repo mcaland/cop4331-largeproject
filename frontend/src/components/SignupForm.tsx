@@ -43,8 +43,8 @@ function SignupForm()
 
                             <Form.Label muted>These details can be changed on your account page.</Form.Label>
 
-                            <Button id='signUpButton'>Sign up</Button>
-                            <Form.Label muted>Already have an account? <Button variant='link' style={{padding: '0px'}}>Log in here.</Button></Form.Label>
+                            <Button id='signUpButton' href='/onboarding'>Sign up</Button>
+                            <Form.Label muted>Already have an account? <Button variant='link' style={{padding: '0px'}} href='/login'>Log in here.</Button></Form.Label>
                         </Stack>
                     </InputGroup>
                 </Card.Body>

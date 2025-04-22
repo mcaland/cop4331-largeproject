@@ -21,7 +21,7 @@ function Navigation()
 
     return (
         <>
-            <Navbar className='fixed-top border-bottom bg-body'>
+            <Navbar className='navbar-fixed-top border-bottom bg-body'>
                 <Container>
                     <Navbar.Brand><Button variant='link' href='/home' className='text-reset text-decoration-none'>JamR</Button></Navbar.Brand>
                     <Form.Control type='search' id='searchBar' placeholder='Search'></Form.Control>

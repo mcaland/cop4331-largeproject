@@ -14,9 +14,9 @@ function Profile()
     return (
         <Container>
             <Row>
-                <Stack direction='horizontal' gap={5} className='align-items-end'>
+                <Stack direction='horizontal' gap={4} className='align-items-end'>
                     <Image style={{height: '200px', width: '200px'}} src={PFP}/>
-                    <h1 >John Doe</h1>
+                    <h1 className='text-start align-bottom fw-semibold'>John Doe</h1>
                 </Stack>
             </Row>
             <Row>

@@ -102,7 +102,7 @@ function ExperienceForm()
             <ListGroup.Item key={ind} id={e}>
                 <Stack direction='horizontal'>
                     <h6 style={{width: '500%'}}>{e}</h6>
-                    <Form.Control type='number' placeholder='0'/>
+                    <Form.Control type='number' placeholder='0' min={0}/>
                     <Button variant='danger' key={skills[0]} onClick={() => {target = e; handleDelete()}}>Delete</Button>
                 </Stack>
             </ListGroup.Item>
@@ -110,7 +110,7 @@ function ExperienceForm()
     }
 
     return (
-        <Container className=''>
+        <Container style={{height: '100%'}} className='d-flex flex-column'>
             <Dropdown onSelect={handleSelected} key={experienceElements[0]}>
                 <Dropdown.Toggle id='experience-dropdown'>
                     Add Experience
@@ -121,7 +121,7 @@ function ExperienceForm()
                 </Dropdown.Menu>
             </Dropdown>
 
-            <ListGroup style={{marginTop: '30px', overflowY: 'auto'}} className='border bg-danger' id="experienceList">
+            <ListGroup style={{marginTop: '30px', overflowY: 'auto', height: '1px'}} className='border flex-grow-1 overflow-auto' id="experienceList">
                 {experienceElements}
             </ListGroup>
         </Container>

@@ -9,6 +9,7 @@ import Register from './pages/Register';
 import Me from './pages/Me';
 import User from './pages/User';
 import Setup from './pages/Setup';
+import Landing from './pages/Landing';
 
 function App() {
   const [count, setCount] = useState(0)
@@ -17,7 +18,8 @@ function App() {
     <div style={{width: '100vw', height: '100vh'}}>
       <Router>
         <Routes>
-        <Route path="/home" element={<Home />} />
+          <Route path="/" element={<Landing />}/>
+          <Route path="/home" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/onboarding" element={<Setup />} />

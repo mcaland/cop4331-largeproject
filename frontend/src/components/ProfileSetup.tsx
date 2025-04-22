@@ -99,7 +99,7 @@ function ProfileSetup()
                 <Container style={{paddingTop: '20px'}}>
                     <Card.Title>Hey! Let's get to know you more.</Card.Title>
                 </Container>
-                <Container style={{padding: '20px'}} className='bg-black'>
+                <Container style={{padding: '20px', height: '100%', marginBottom: '2vh'}} className=''>
                     {returnPage(current_page)}
                 </Container>
                 <Container className='mt-auto'>

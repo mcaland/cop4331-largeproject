@@ -12,7 +12,9 @@ import ExperienceForm from './ExperienceForm';
 
 function ProfileSetup()
 {
-    let experienceElements = [];
+    const [experienceTags, setExperienceTags] = React.useState([]); // stores experience tags
+    const [lookingTags, setLookingTags] = React.useState([]); // stores looking tags
+    let files = []; // stores files
     const max_pages = 3;
     const [current_page, setPage] = React.useState(1);
 
@@ -38,7 +40,7 @@ function ProfileSetup()
             return (
                 <>
                     <h5 className='text-muted'>Who are you?</h5>
-                    <ExperienceForm />
+                    <ExperienceForm data={experienceTags} callback={setExperienceTags} />
                 </>
             );
         }
@@ -47,7 +49,7 @@ function ProfileSetup()
             return (
                 <>
                     <h5 className='text-muted'>Who are you looking for?</h5>
-                    <ExperienceForm />
+                    <ExperienceForm data={lookingTags} callback={setLookingTags} />
                 </>
             );
         }

@@ -1,7 +1,5 @@
 // navigation bar for home and search
 
-import useState from 'react';
-
 import Dropdown from 'react-bootstrap/Dropdown';
 import Navbar from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
@@ -14,8 +12,11 @@ import PFP from '../assets/fake_person.png';
 function Navigation()
 {
 
-    function Logout()
+    function doLogout(event : any)
     {
+        event.preventDefault();
+
+        localStorage.removeItem('user_data');
         window.location.href = "/";
     }
 
@@ -30,7 +31,7 @@ function Navigation()
 
                         <Dropdown.Menu>
                             <Dropdown.Item href='/me' key={1}>Profile</Dropdown.Item>
-                            <Dropdown.Item onClick={Logout} key={2} className='btn btn-danger'>Log out</Dropdown.Item>
+                            <Dropdown.Item onClick={doLogout} key={2} className='btn btn-danger'>Log out</Dropdown.Item>
                         </Dropdown.Menu>
                     </Dropdown>
                 </Container>

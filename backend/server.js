@@ -5,7 +5,9 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoutes = require('./routes/auth'); 
 
-dotenv.config();
+dotenv.config({ path: './backend/.env' });
+
+console.log("Loaded MONGO_URI:", process.env.MONGO_URI);
 
 const app = express();
 

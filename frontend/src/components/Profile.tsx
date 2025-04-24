@@ -11,7 +11,7 @@ function Profile({ name = "John Doe", experience = [], lookingfor = [], imgPath 
     if (imgPath !== "holder.js/200px200")
     {
         console.log(imgPath);
-        imgPath = "http://localhost:3000/files/" + imgPath.split("files/")[1];
+        imgPath = "http://largeproject.maudxd.online/files/" + imgPath.split("files/")[1];
         console.log(imgPath);
     }
 

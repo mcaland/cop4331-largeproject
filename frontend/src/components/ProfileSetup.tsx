@@ -43,7 +43,7 @@ function ProfileSetup()
 
         try
         {
-            const response = await fetch(`http://localhost:5000/api/auth/edit/${userID}`, {method: 'PATCH', body: js, headers: {'Content-Type': 'application/json'}});
+            const response = await fetch(`http://largeproject.maudxd.online/api/auth/edit/${userID}`, {method: 'PATCH', body: js, headers: {'Content-Type': 'application/json'}});
 
             var res = JSON.parse(await response.text());
 

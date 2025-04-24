@@ -28,7 +28,7 @@ function EditProfile()
 
     if (imgPath !== "")
     {
-        relImgPath = "http://localhost:3000/files/" + imgPath.split("files/")[1];
+        relImgPath = "https://largeproject.maudxd.online/files/" + imgPath.split("files/")[1];
     }
     else
     {
@@ -61,7 +61,7 @@ function EditProfile()
 
         try
         {
-            const response = await fetch(`http://localhost:5000/api/auth/edit/${userID}`, {method: 'PATCH', body: js, headers: {'Content-Type': 'application/json'}});
+            const response = await fetch(`https://largeproject.maudxd.online/api/auth/edit/${userID}`, {method: 'PATCH', body: js, headers: {'Content-Type': 'application/json'}});
 
             var res = JSON.parse(await response.text());
 

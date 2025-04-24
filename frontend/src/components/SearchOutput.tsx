@@ -29,7 +29,7 @@ async function SearchOutput()
 
         try
         {
-            const response = await fetch('http://localhost:5000/api/auth/search', {method: 'POST', body: js, headers: {'Content-Type': 'application/json'}});
+            const response = await fetch('https://largeproject.maudxd.online/api/auth/search', {method: 'POST', body: js, headers: {'Content-Type': 'application/json'}});
 
             var res = JSON.parse(await response.text());
 
@@ -44,7 +44,8 @@ async function SearchOutput()
                     skills: res.skills,
                     lookingFor: res.lookingFor,
                     imageUrl: res.imageUrl,
-                    audioUrl: res.audioUrl
+                    audioUrl: res.audioUrl,
+                    UserID: res.UserID
                 };
                 
                 return(   

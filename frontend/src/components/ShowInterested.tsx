@@ -27,7 +27,7 @@ async function ShowInterested()
     var js = JSON.stringify(obj);
         try
         {
-            const response = await fetch('http://localhost:5000/api/auth/search', {method: 'POST', body: js, headers: {'Content-Type': 'application/json'}});
+            const response = await fetch('https://largeproject.maudxd.online/api/auth/search', {method: 'POST', body: js, headers: {'Content-Type': 'application/json'}});
 
             var res = JSON.parse(await response.text());
 

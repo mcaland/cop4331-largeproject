@@ -143,7 +143,7 @@ function SignupForm()
                             <FloatingLabel controlId='floatingPassword' label='Password'>
                                 <Form.Control type={passwordState} placeholder='strongPassword' onChange={handlePasswordChange}/>
                                 <Form.Text muted>
-                                    Your password must be at least 16 characters long, containing numbers, uppercase and lowercase letters, and special characters. <Button variant='link' className='text-reset text-decoration-none' style={{padding: '0'}} onClick={handlePasswordVisibleChange}>{passwordBtnText}</Button>
+                                    Your password must be at least 16 characters long, containing numbers, uppercase and lowercase letters, and special characters. <Button variant='primary' style={{padding: '4px'}} onClick={handlePasswordVisibleChange}>{passwordBtnText}</Button>
                                 </Form.Text>
                             </FloatingLabel>
 
@@ -151,14 +151,14 @@ function SignupForm()
                             <FloatingLabel controlId='floatingPasswordConfirm' label='Confirm password'>
                                 <Form.Control type={passwordState} placeholder='strongPassword' onChange={handlePasswordChkChange} />
                                 <Form.Text muted>
-                                    Please retype your password. <Button variant='link' className='text-reset text-decoration-none' style={{padding: '0'}} onClick={handlePasswordVisibleChange}>{passwordBtnText}</Button>
+                                    Please retype your password. <Button variant='primary' style={{padding: '4px'}} onClick={handlePasswordVisibleChange}>{passwordBtnText}</Button>
                                 </Form.Text>
                             </FloatingLabel>
 
                             <Form.Label muted>These details can be changed on your account page.</Form.Label>
 
                             <Button id='signUpButton' onClick={doSignup}>Sign up</Button>
-                            <Form.Label muted>Already have an account? <Button variant='link' style={{padding: '0px'}} href='/login'>Log in here.</Button></Form.Label>
+                            <Form.Label muted>Already have an account? <a href='/login'>Log in here.</a></Form.Label>
                         </Stack>
                     </InputGroup>
                 </Card.Body>

@@ -159,7 +159,7 @@ router.post('/imageUpload', fileUpload({ createParentPath: true }), async (req, 
     user.imageUrl = filepath;
     await user.save();
 
-    return res.status(200).json({ message: "File uploaded successfully!" })
+    return res.status(200).json({ message: "File uploaded successfully!", path: filepath })
   }
   catch (err)
   {

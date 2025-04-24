@@ -21,7 +21,7 @@ function Profile({ name = "John Doe", experience = [], lookingfor = [], imgPath 
 
         for (let i = 0; i < e.length; i++)
         {
-            tagList.push(<Button style={{flex: '0 0 auto'}}>{e[i]}</Button>);
+            tagList.push(<Button style={{flex: '0 0 auto'}} key={i}>{e[i]}</Button>);
         }
 
         return tagList;

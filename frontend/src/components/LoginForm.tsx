@@ -93,7 +93,7 @@ function LoginForm()
 
                             <Button id='loginButton' onClick={doLogin}>Log in</Button>
 
-                            <Form.Label muted>Don't have an account? <Button variant='link' style={{padding: '0px'}} href='/register'>Sign up here.</Button></Form.Label>
+                            <Form.Label muted>Don't have an account? <a href='/register'>Sign up here.</a></Form.Label>
                         </Stack>
                     </InputGroup>
                 </Card.Body>

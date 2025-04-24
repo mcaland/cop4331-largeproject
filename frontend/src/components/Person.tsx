@@ -5,7 +5,6 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Stack  from 'react-bootstrap/Stack';
 
-import 'bootstrap/dist/css/bootstrap.min.css';
 import Image from '../assets/fake_person.png';
 
 

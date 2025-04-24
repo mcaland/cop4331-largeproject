@@ -12,27 +12,38 @@ import ExperienceForm from './ExperienceForm';
 
 function ProfileSetup()
 {
-    const [experienceTags, setExperienceTags] = React.useState([]); // stores experience tags
-    const [lookingTags, setLookingTags] = React.useState([]); // stores looking tags
-    let files = []; // stores files
     const max_pages = 3;
     const [current_page, setPage] = React.useState(1);
-
-    React.useEffect(() => {handleExperienceTags();}, [experienceTags]);
 
     var _ud = localStorage.getItem('user_data');
     if (_ud == null) _ud = '';
     var ud = JSON.parse(_ud);
-    var id = ud.userID;
+    var userID = ud.userID;
 
-    async function handleExperienceTags() : Promise<void>
+    React.useEffect(() => {updateUserData()}, [current_page])
+
+    const [experienceTags, setExperienceTags] = React.useState(ud.skills); // stores experience tags
+    const [lookingTags, setLookingTags] = React.useState(ud.lookingFor); // stores looking tags
+    const [imgPath, setImagePath] = React.useState(ud.imageUrl);
+
+    async function updateUserData()
     {
-        var obj = { userID: id, skills: experienceTags };
+        var obj : any = { };
+
+        if (experienceTags !== ud.experience)
+        {
+            obj.skills = experienceTags;
+        }
+        if (lookingTags !== ud.wantedTags)
+        {
+            obj.lookingFor = lookingTags;
+        }
+
         var js = JSON.stringify(obj);
 
         try
         {
-            const response = await fetch('http://localhost:5000/api/auth/updateUser', {method: 'POST', body: js, headers: {'Content-Type': 'application/json'}});
+            const response = await fetch(`http://localhost:5000/api/auth/edit/${userID}`, {method: 'PATCH', body: js, headers: {'Content-Type': 'application/json'}});
 
             var res = JSON.parse(await response.text());
 
@@ -42,6 +53,17 @@ function ProfileSetup()
             }
             else
             {
+                ud.skills = experienceTags;
+                ud.lookingFor = lookingTags;
+                ud.imageUrl = imgPath;
+
+                localStorage.setItem('user_data', JSON.stringify(ud));
+                
+                if (current_page == 4)
+                {
+                    window.location.href = '/home';
+                }
+
                 //updateAlert(<Alert variant='success'>{res.message}</Alert>);
                 
                 // TODO: update cookies
@@ -59,18 +81,25 @@ function ProfileSetup()
         const file = e.target.files[0];
         const formData = new FormData();
 
-        formData.append("userID", id);
-        formData.append(id + "." + file.name.split(".")[1], file);
-        
-        const response = await fetch('http://localhost:5000/api/auth/imageUpload',
-            {
-                method: 'POST',
-                body: formData
-            });
+        formData.append("userID", userID);
+        formData.append(userID + "." + file.name.split(".")[1], file);
 
-        const json = await response.json();
+        try
+        {
+            const response = await fetch('http://localhost:5000/api/auth/imageUpload',
+                {
+                    method: 'POST',
+                    body: formData
+                });
+    
+            var res = JSON.parse(await response.json());
 
-        console.log(json);
+            setImagePath(res.path);
+        }
+        catch (err)
+        {
+
+        }
     }
 
     const handleAudioUpload = async (e : any) =>
@@ -121,7 +150,7 @@ function ProfileSetup()
         
     };
 
-    function getPageButtom(e : number)
+    function getPageButton(e : number)
     {
         if (e == 1)
         {
@@ -149,7 +178,7 @@ function ProfileSetup()
                 <>
                     <Button onClick={() => {setPage(current_page - 1)}}>Back</Button>
                     <ProgressBar className='me-auto' style={{width: '100%'}} now={100* (current_page/max_pages)} label={`${Math.round(100 * (current_page / max_pages))}%`}></ProgressBar>
-                    <Button href='/home'>Finish</Button>
+                    <Button onClick={() => {setPage(current_page + 1)}}>Finish</Button>
                 </>
             );
         }
@@ -166,7 +195,7 @@ function ProfileSetup()
                 </Container>
                 <Container className='mt-auto'>
                     <Stack direction='horizontal' gap={2}>
-                        {getPageButtom(current_page)}
+                        {getPageButton(current_page)}
                     </Stack>
                 </Container>
             </Card.Body>

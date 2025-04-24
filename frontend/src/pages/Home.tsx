@@ -14,7 +14,7 @@ function Home()
     <>
         <Navigation />
         <Container>
-            <Tabs>
+            <Tabs defaultActiveKey='recommended'>
                 <Tab eventKey='recommended' title='Recommended'>
                     <Container>
                         <Row>

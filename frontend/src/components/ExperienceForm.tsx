@@ -20,7 +20,7 @@ function ExperienceForm({ data, callback })
     React.useEffect(() => {generateList();}, [skills]);
 
     const experienceList = [
-        'Event Organizer', 
+        'Organizer', 
         'Voice',
         'Bass',
         'Guitar',

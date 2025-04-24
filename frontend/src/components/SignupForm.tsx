@@ -16,8 +16,11 @@ function SignupForm()
     const [userName, updateName] = React.useState('');
     const [userEmail, updateEmail] = React.useState('');
     const [userPassword, updatePassword] = React.useState('');
+    const [userPasswordChk, updatePasswordChk] = React.useState('');
     const [err, updateError] = React.useState('');
     const [alertElement, updateAlert] = React.useState(<></>);
+    const [passwordState, updatePasswordState] = React.useState('password');
+    const [passwordBtnText, updatePasswordBtnText] = React.useState('Show password');
 
     function handleNameChange(e : any) : void
     {
@@ -34,6 +37,11 @@ function SignupForm()
         updatePassword(e.target.value);
     }
 
+    function handlePasswordChkChange(e : any) : void
+    {
+        updatePasswordChk(e.target.value);
+    }
+
     function updateErrorMessage(e : string)
     {
         updateError(e);
@@ -41,8 +49,42 @@ function SignupForm()
         updateAlert(<Alert variant='danger'>{e}</Alert>);
     }
 
+    function handlePasswordVisibleChange(e : any)
+    {
+        if (passwordState === 'password')
+        {
+            updatePasswordState('text');
+            updatePasswordBtnText('Hide password');
+        }
+        else
+        {
+            updatePasswordState('password');
+            updatePasswordBtnText('Show password');
+        }
+    }
+
     async function doSignup(e : any) : Promise<void>
     {
+        // check password regex and if the two match
+
+            // password regex
+        let passwordRegex = new RegExp("^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#!?@$%^&*-]).{16,}$");
+        let test = passwordRegex.test(userPassword);
+        
+        if (!test)
+        {
+            updateAlert(<Alert variant='danger'>Password does not fulfill the requirements.</Alert>);
+            return;
+        }
+        else // password fulfills requirements
+        {
+            if (userPassword !== userPasswordChk)
+            {
+                updateAlert(<Alert variant='danger'>Passwords do not match.</Alert>);
+                return;
+            }
+        }
+
         var obj = { displayName: userName, email: userEmail, password: userPassword};
         var js = JSON.stringify(obj);
 
@@ -58,6 +100,7 @@ function SignupForm()
             }
             else
             {
+                updateAlert(<Alert variant='success'>{res.message}</Alert>);
                 var user = {
                     userID: res.userID,
                     displayName: res.displayName,
@@ -98,24 +141,24 @@ function SignupForm()
                             </FloatingLabel>
 
                             <FloatingLabel controlId='floatingPassword' label='Password'>
-                                <Form.Control type='password' placeholder='strongPassword' onChange={handlePasswordChange}/>
+                                <Form.Control type={passwordState} placeholder='strongPassword' onChange={handlePasswordChange}/>
                                 <Form.Text muted>
-                                    Your password must be at least 16 characters long, containing numbers, uppercase and lowercase letters, and special characters.
+                                    Your password must be at least 16 characters long, containing numbers, uppercase and lowercase letters, and special characters. <Button variant='primary' style={{padding: '4px'}} onClick={handlePasswordVisibleChange}>{passwordBtnText}</Button>
                                 </Form.Text>
                             </FloatingLabel>
 
 
                             <FloatingLabel controlId='floatingPasswordConfirm' label='Confirm password'>
-                                <Form.Control type='password' placeholder='strongPassword'/>
+                                <Form.Control type={passwordState} placeholder='strongPassword' onChange={handlePasswordChkChange} />
                                 <Form.Text muted>
-                                    Please retype your password.
+                                    Please retype your password. <Button variant='primary' style={{padding: '4px'}} onClick={handlePasswordVisibleChange}>{passwordBtnText}</Button>
                                 </Form.Text>
                             </FloatingLabel>
 
                             <Form.Label muted>These details can be changed on your account page.</Form.Label>
 
                             <Button id='signUpButton' onClick={doSignup}>Sign up</Button>
-                            <Form.Label muted>Already have an account? <Button variant='link' style={{padding: '0px'}} href='/login'>Log in here.</Button></Form.Label>
+                            <Form.Label muted>Already have an account? <a href='/login'>Log in here.</a></Form.Label>
                         </Stack>
                     </InputGroup>
                 </Card.Body>

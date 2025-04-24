@@ -7,10 +7,21 @@ import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button';
 import Image from 'react-bootstrap/Image';
 
-import PFP from '../assets/fake_person.png';
-
 function Navigation()
 {
+    var _ud = localStorage.getItem('user_data');
+    if (_ud == null) _ud = '';
+    var ud = JSON.parse(_ud);
+    var imgPath = ud.imageUrl;
+
+    if (imgPath !== "")
+    {
+        imgPath = "http://localhost:3000/files/" + imgPath.split("files/")[1];
+    }
+    else
+    {
+        imgPath = "holder.js/200px200";
+    }
 
     function doLogout(event : any)
     {
@@ -24,10 +35,10 @@ function Navigation()
         <>
             <Navbar className='navbar-fixed-top border-bottom bg-body'>
                 <Container>
-                    <Navbar.Brand><Button variant='link' href='/home' className='text-reset text-decoration-none'>JamR</Button></Navbar.Brand>
+                    <Navbar.Brand><a href='/home' className='text-decoration-none'>JamR</a></Navbar.Brand>
                     <Form.Control type='search' id='searchBar' placeholder='Search'></Form.Control>
                     <Dropdown>
-                        <Dropdown.Toggle variant='link'><Image src={PFP} className='float-right' style={{height: '40px'}} id='PFP' roundedCircle></Image></Dropdown.Toggle>
+                        <Dropdown.Toggle variant='link'><Image src={imgPath} className='float-right' style={{height: '40px'}} id='PFP' roundedCircle></Image></Dropdown.Toggle>
 
                         <Dropdown.Menu>
                             <Dropdown.Item href='/me' key={1}>Profile</Dropdown.Item>

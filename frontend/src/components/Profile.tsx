@@ -6,17 +6,22 @@ import Stack from 'react-bootstrap/Stack';
 import Image from 'react-bootstrap/Image';
 import Button from 'react-bootstrap/Button';
 
-import PFP from '../assets/fake_person.png';
-
-function Profile({ name = "John Doe", experience = [], lookingfor = [] })
+function Profile({ name = "John Doe", experience = [], lookingfor = [], imgPath = "holder.js/200px200" })
 {
+    if (imgPath !== "holder.js/200px200")
+    {
+        console.log(imgPath);
+        imgPath = "http://localhost:3000/files/" + imgPath.split("files/")[1];
+        console.log(imgPath);
+    }
+
     function parseTags(e : string[])
     {
         let tagList : any[] = [];
 
         for (let i = 0; i < e.length; i++)
         {
-            tagList.push(<Button style={{flex: '0 0 auto'}}>{e[i]}</Button>);
+            tagList.push(<Button style={{flex: '0 0 auto'}} key={i}>{e[i]}</Button>);
         }
 
         return tagList;
@@ -26,7 +31,7 @@ function Profile({ name = "John Doe", experience = [], lookingfor = [] })
         <Container>
             <Row>
                 <Stack direction='horizontal' gap={4} className='align-items-end'>
-                    <Image style={{height: '200px', width: '200px'}} src={PFP}/>
+                    <Image style={{height: '200px', width: '200px'}} src={imgPath}/>
                     <h1 className='text-start align-bottom fw-semibold'>{name}</h1>
                 </Stack>
             </Row>

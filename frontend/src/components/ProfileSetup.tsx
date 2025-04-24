@@ -43,11 +43,7 @@ function ProfileSetup()
 
         try
         {
-<<<<<<< Updated upstream
-            const response = await fetch(`http://largeproject.maudxd.online/api/auth/edit/${userID}`, {method: 'PATCH', body: js, headers: {'Content-Type': 'application/json'}});
-=======
             const response = await fetch(`https://largeproject.maudxd.online/api/auth/edit/${userID}`, {method: 'PATCH', body: js, headers: {'Content-Type': 'application/json'}});
->>>>>>> Stashed changes
 
             var res = JSON.parse(await response.text());
 

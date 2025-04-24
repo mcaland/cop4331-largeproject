@@ -32,13 +32,6 @@ function EditProfile()
 
     function getRelativePath(fullPath : string)
     {
-<<<<<<< Updated upstream
-        relImgPath = "https://largeproject.maudxd.online/files/" + imgPath.split("files/")[1];
-    }
-    else
-    {
-        relImgPath = "holder.js/200px200";
-=======
         if (fullPath !== "" && fullPath !== "holder.js/200px200")
         {
             return ("https://largeproject.maudxd.online/files/" + fullPath.split("files/")[1]);
@@ -47,7 +40,6 @@ function EditProfile()
         {
             return ("holder.js/200px200");
         }
->>>>>>> Stashed changes
     }
 
     function handleDisplayNameChange(e : any)

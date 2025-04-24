@@ -5,16 +5,21 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Stack  from 'react-bootstrap/Stack';
 
+
 import 'bootstrap/dist/css/bootstrap.min.css';
 
+interface Props {
+    name: string;
+    experienceTags: string[];
+    lookingforTags: string[];
+    imageUrl: string;
+    audioUrl: string;
+  }
 
 
-
-function Person({name, experienceTags, lookingforTags, imageUrl })
+function Person(props: Props)
 {
-    import('./assets' + imageUrl).then(imageModule => {
-        
-      });
+
 
     function parseTags(e : string[])
     {
@@ -27,27 +32,29 @@ function Person({name, experienceTags, lookingforTags, imageUrl })
 
         return tagList;
     }
+    console.log('../assets/' + props.imageUrl)
 
     return (
     <Col>
         <Card style={{width: '20rem'}} data-bs-theme='dark'>
-            <Card.Img variant='top' src={imageModule} />
+            <Card.Img variant='top' src={'../assets/' + props.imageUrl} />
+            <Card.ImgOverlay className= "justify-content-flex-end" ><Button style={{width: '15%', borderRadius: 100, backgroundColor: 'grey'}}>&#9658;</Button></Card.ImgOverlay>
             <Card.Body>
                 <Stack>
                     <Card.Title>
-                        {name}
+                        {props.name}
                     </Card.Title>
                     <Card.Text>
                         looking for:
                     </Card.Text>
                     <Stack direction='horizontal' style={{overflowX: "scroll", overflowY: 'hidden', width: '100%', display: 'flex', gap: '5px', paddingBottom: '5px'}}>
-                        {parseTags(lookingforTags)}
+                        {parseTags(props.lookingforTags)}
                     </Stack>
                     <Card.Text>
                         skills:
                     </Card.Text>
                     <Stack direction='horizontal' style={{overflowX: "scroll", overflowY: 'hidden', width: '100%', display: 'flex', gap: '5px', paddingBottom: '5px'}}>
-                        {parseTags(experienceTags)}
+                        {parseTags(props.experienceTags)}
                     </Stack>
                     <Button>Interested</Button>
                 </Stack>

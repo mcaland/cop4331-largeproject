@@ -29,7 +29,7 @@ function Me()
     {
         return (
             <Container>
-                <Navigation />
+                <Navigation callback={null} />
                 <EditProfile />
                 <Button style={{width: '100%'}} onClick={toggleVisible} variant='danger'>Cancel changes</Button>
             </Container>
@@ -39,7 +39,7 @@ function Me()
     {
         return (
             <Container>
-                <Navigation />
+                <Navigation callback={null} />
                 <Profile name={displayName} experience={experienceTags} lookingfor={wantedTags} imgPath={imgPath} />
                 <Button style={{width: '100%'}} onClick={toggleVisible}>Edit profile</Button>
             </Container>

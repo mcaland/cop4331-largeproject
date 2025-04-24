@@ -1,10 +1,12 @@
 // site homepage
 
+import React from 'react';
+
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
-import SearchOutput from '../components/SearchOutput.tsx'
+import Search from '../components/Search.tsx'
 import Col from 'react-bootstrap/Col';
 
 import Navigation from "../components/Navigation";
@@ -13,16 +15,20 @@ import Person from "../components/Person";
 
 function Home()
 {
+    const [searchResults, updateResults] = React.useState<any>([]);
+
     return (
     <>
-        <Navigation />
+        <Navigation callback={updateResults} />
         <Container>
             <Tabs defaultActiveKey='recommended'>
                 <Tab eventKey='recommended' title='Recommended'>
                     <Container>
                         <Row>
-                            <SearchOutput />
-                            <Col></Col>
+                            {searchResults}
+                            <Col>
+                                
+                            </Col>
 
                         </Row>
                     </Container>
@@ -30,8 +36,10 @@ function Home()
                 <Tab eventKey='interested' title='Interested'>
                     <Container>
                         <Row>
-                            <ShowInterested />
-                            <Col></Col>
+                            {searchResults}
+                            <Col>
+                                
+                            </Col>
                         </Row>
                     </Container>
                 </Tab>

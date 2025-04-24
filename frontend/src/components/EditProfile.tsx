@@ -94,7 +94,7 @@ function EditProfile()
             if (res.path !== "")
             {
                 
-                updateRelImgPath("https://largeproject.maudxd.online/files/" + res.path.split("files/")[1]);
+                updateRelImgPath("http://https://largeproject.maudxd.online/files/" + res.path.split("files/")[1]);
             }
             else
             {

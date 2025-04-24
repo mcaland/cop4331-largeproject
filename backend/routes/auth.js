@@ -86,7 +86,7 @@ router.post('/search', async (req, res) => {
 
     res.status(200).json(users);
   } catch (err) {
-    res.status(500).json({ error: 'Search failed' });
+    res.status(500).json({ error: err.toString() });
   }
 });
 

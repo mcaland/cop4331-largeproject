@@ -14,7 +14,7 @@ interface Props {
   }
 
 
-function Person(props: Props)
+function Person({ name, experienceTags, lookingforTags, imageUrl, audioUrl })
 {
 
 
@@ -30,7 +30,7 @@ function Person(props: Props)
         return tagList;
     }
     
-    var imgPath = props.imageUrl;
+    var imgPath = imageUrl;
 
     if (imgPath !== "")
     {
@@ -41,8 +41,6 @@ function Person(props: Props)
         imgPath = "holder.js/200px200";
     }
 
-    console.log(props.imageUrl);
-
     return (
     <Col>
         <Card style={{width: '20rem'}} data-bs-theme='dark'>
@@ -51,19 +49,19 @@ function Person(props: Props)
             <Card.Body>
                 <Stack>
                     <Card.Title>
-                        {props.name}
+                        {name}
                     </Card.Title>
                     <Card.Text>
                         looking for:
                     </Card.Text>
                     <Stack direction='horizontal' style={{overflowX: "scroll", overflowY: 'hidden', width: '100%', display: 'flex', gap: '5px', paddingBottom: '5px'}}>
-                        {parseTags(props.lookingforTags)}
+                        {parseTags(lookingforTags)}
                     </Stack>
                     <Card.Text>
                         skills:
                     </Card.Text>
                     <Stack direction='horizontal' style={{overflowX: "scroll", overflowY: 'hidden', width: '100%', display: 'flex', gap: '5px', paddingBottom: '5px'}}>
-                        {parseTags(props.experienceTags)}
+                        {parseTags(experienceTags)}
                     </Stack>
                     <Button>Interested</Button>
                 </Stack>

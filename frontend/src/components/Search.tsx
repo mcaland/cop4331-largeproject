@@ -15,7 +15,7 @@ function Search()
     });
     
 
-    const handleChange = e => {
+    const handleChange = (e : any) => {
         setSearchField(e.target.value);
         if(e.target.value===""){
           setSearchShow(false);

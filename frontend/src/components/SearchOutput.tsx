@@ -24,12 +24,16 @@ async function SearchOutput()
 
     }
 
-    var obj = {keyword: handleChange};
+    var obj = {keyword: searchField};
     var js = JSON.stringify(obj);
+
+    console.log(obj);
 
         try
         {
             const response = await fetch('https://largeproject.maudxd.online/api/auth/search', {method: 'POST', body: js, headers: {'Content-Type': 'application/json'}});
+
+
 
             var res = JSON.parse(await response.text());
 
@@ -39,22 +43,20 @@ async function SearchOutput()
             }
             else
             {
-                var users = {
-                    displayName: res.displayName,
-                    skills: res.skills,
-                    lookingFor: res.lookingFor,
-                    imageUrl: res.imageUrl,
-                    audioUrl: res.audioUrl,
-                    UserID: res.UserID
-                };
+
+                console.log(res);
+                // var users = {
+                //     displayName: res.displayName,
+                //     skills: res.skills,
+                //     lookingFor: res.lookingFor,
+                //     imageUrl: res.imageUrl,
+                //     audioUrl: res.audioUrl,
+                //     UserID: res.UserID
+                // };
                 
                 return(   
                     <Person 
-                        {...users.displayName}
-                        {...users.skills}
-                        {...users.lookingFor}
-                        {...users.imageUrl}
-                        {...users.audioUrl}
+
                     />
                 )
             }

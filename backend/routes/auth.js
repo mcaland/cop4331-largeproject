@@ -109,6 +109,32 @@ router.post('/interested', async (req, res) => {
   }
 });
 
+// Edit Endpoint
+router.patch('/edit/:userId', async (req, res) => {
+  const { userId } = req.params;
+  const updates = req.body;  
+
+  try {
+    const updatedUser = await User.findByIdAndUpdate(
+      userId,
+      updates,
+      { new: true, runValidators: true }  
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.status(200).json({
+      message: 'User profile updated successfully',
+      updatedUser
+    });
+  } catch (error) {
+    console.error('Edit profile error:', error);
+    res.status(500).json({ error: 'Failed to update user profile' });
+  }
+});
+
 
 // LOGOUT Endpoint
 router.post('/logout', (req, res) => {

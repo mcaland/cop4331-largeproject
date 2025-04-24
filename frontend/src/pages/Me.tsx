@@ -10,11 +10,10 @@ function Me()
 {
     var _ud = localStorage.getItem('user_data');
     if (_ud == null) _ud = '';
-    var ud = JSON.parse(ud);
-    var id = ud.id;
+    var ud = JSON.parse(_ud);
     var displayName = ud.displayName;
-    var experienceTags = ud.experienceTags;
-    var wantedTags = ud.wantedTags;
+    var experienceTags = ud.skills;
+    var wantedTags = ud.lookingFor;
 
     return (
         <Container>

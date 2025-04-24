@@ -13,11 +13,16 @@ import Alert from 'react-bootstrap/Alert';
 
 function SignupForm()
 {
+    const [userName, updateName] = React.useState('');
     const [userEmail, updateEmail] = React.useState('');
     const [userPassword, updatePassword] = React.useState('');
     const [err, updateError] = React.useState('');
+    const [alertElement, updateAlert] = React.useState(<></>);
 
-    let alertElement = null;
+    function handleNameChange(e : any) : void
+    {
+        updateName(e.target.value);
+    }
 
     function handleEmailChange(e : any) : void
     {
@@ -33,30 +38,40 @@ function SignupForm()
     {
         updateError(e);
 
-        alertElement = <Alert variant='danger'>{err}</Alert>
+        updateAlert(<Alert variant='danger'>{e}</Alert>);
     }
 
-    async function doLogin(e : any) : Promise<void>
+    async function doSignup(e : any) : Promise<void>
     {
-        var obj = {email: userEmail, password: userPassword};
+        var obj = { displayName: userName, email: userEmail, password: userPassword};
         var js = JSON.stringify(obj);
 
         try
         {
-            const response = await fetch('https://largeproject.maudxd.online/api/regiser', {method: 'POST', body: js, headers: {'Content-Type': 'application/json'}});
+            const response = await fetch('http://localhost:5000/api/auth/register', {method: 'POST', body: js, headers: {'Content-Type': 'application/json'}});
 
             var res = JSON.parse(await response.text());
 
-            if (res.id <= 0)
+            if (res.error != null)
             {
-                updateErrorMessage("Incorrect username/password combination.");
+                updateErrorMessage(res.error);
             }
             else
             {
-                var user = {displayName: res.displayName, id: res.id};
+                var user = {
+                    userID: res.userID,
+                    displayName: res.displayName,
+                    email: res.email,
+                    skills: res.skills,
+                    lookingFor: res.lookingFor,
+                    matchedUsers: res.matchedUsers,
+                    interestedUsers: res.interestedUsers,
+                    imageUrl: res.imageUrl,
+                    audioUrl: res.audioUrl
+                };
                 localStorage.setItem('user_data', JSON.stringify(user));
 
-                window.location.href = '/home';
+                window.location.href = '/onboarding';
             }
         }
         catch (error : any)
@@ -75,15 +90,15 @@ function SignupForm()
                             <Card.Title>Register for JamR</Card.Title>
                             {alertElement}
                             <FloatingLabel controlId='floatingName' label='Display name'>
-                                <Form.Control type='text' placeholder='John Doe'/>
+                                <Form.Control type='text' placeholder='John Doe' onChange={handleNameChange}/>
                             </FloatingLabel>
 
                             <FloatingLabel controlId='floatingEmail' label='Email address'>
-                                <Form.Control type='email' placeholder='johndoe@example.com'/>
+                                <Form.Control type='email' placeholder='johndoe@example.com' onChange={handleEmailChange}/>
                             </FloatingLabel>
 
                             <FloatingLabel controlId='floatingPassword' label='Password'>
-                                <Form.Control type='password' placeholder='strongPassword'/>
+                                <Form.Control type='password' placeholder='strongPassword' onChange={handlePasswordChange}/>
                                 <Form.Text muted>
                                     Your password must be at least 16 characters long, containing numbers, uppercase and lowercase letters, and special characters.
                                 </Form.Text>
@@ -99,7 +114,7 @@ function SignupForm()
 
                             <Form.Label muted>These details can be changed on your account page.</Form.Label>
 
-                            <Button id='signUpButton' href='/onboarding'>Sign up</Button>
+                            <Button id='signUpButton' onClick={doSignup}>Sign up</Button>
                             <Form.Label muted>Already have an account? <Button variant='link' style={{padding: '0px'}} href='/login'>Log in here.</Button></Form.Label>
                         </Stack>
                     </InputGroup>

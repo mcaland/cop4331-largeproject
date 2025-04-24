@@ -16,8 +16,7 @@ function LoginForm()
     const [userEmail, updateEmail] = React.useState('');
     const [userPassword, updatePassword] = React.useState('');
     const [err, updateError] = React.useState('');
-
-    let alertElement = null;
+    const [alertElement, updateAlert] = React.useState(<></>);
 
     function handleEmailChange(e : any) : void
     {
@@ -33,7 +32,7 @@ function LoginForm()
     {
         updateError(e);
 
-        alertElement = <Alert variant='danger'>{err}</Alert>
+        updateAlert(<Alert variant='danger'>{e}</Alert>);
     }
 
     async function doLogin(e : any) : Promise<void>
@@ -43,17 +42,27 @@ function LoginForm()
 
         try
         {
-            const response = await fetch('https://largeproject.maudxd.online/api/login', {method: 'POST', body: js, headers: {'Content-Type': 'application/json'}});
+            const response = await fetch('http://localhost:5000/api/auth/login', {method: 'POST', body: js, headers: {'Content-Type': 'application/json'}});
 
             var res = JSON.parse(await response.text());
 
-            if (res.id <= 0)
+            if (res.error != null)
             {
-                updateErrorMessage("Incorrect username/password combination.");
+                updateErrorMessage(res.error);
             }
             else
             {
-                var user = {displayName: res.displayName, id: res.id};
+                var user = {
+                    userID: res.userID,
+                    displayName: res.displayName,
+                    email: res.email,
+                    skills: res.skills,
+                    lookingFor: res.lookingFor,
+                    matchedUsers: res.matchedUsers,
+                    interestedUsers: res.interestedUsers,
+                    imageUrl: res.imageUrl,
+                    audioUrl: res.audioUrl
+                };
                 localStorage.setItem('user_data', JSON.stringify(user));
 
                 window.location.href = '/home';

@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const authRoutes = require('./routes/auth'); 
+const authRoutes = require('./backend/routes/auth'); 
 
 dotenv.config({ path: './backend/.env' });
 

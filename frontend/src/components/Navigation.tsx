@@ -34,7 +34,7 @@ function Navigation()
     return (
         <>
             <Navbar className='navbar-fixed-top border-bottom bg-body'>
-                <Container>
+                <Container style={{gap: '20px'}}>
                     <Navbar.Brand><a href='/home' className='text-decoration-none'>JamR</a></Navbar.Brand>
                     <Form.Control type='search' id='searchBar' placeholder='Search'></Form.Control>
                     <Dropdown>

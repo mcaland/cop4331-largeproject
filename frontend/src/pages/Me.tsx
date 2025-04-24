@@ -31,7 +31,7 @@ function Me()
             <Container>
                 <Navigation />
                 <EditProfile />
-                <Button style={{width: '100%'}} onClick={toggleVisible}>Cancel changes</Button>
+                <Button style={{width: '100%'}} onClick={toggleVisible} variant='danger'>Cancel changes</Button>
             </Container>
         );
     }

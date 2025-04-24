@@ -47,15 +47,15 @@ async function SearchOutput()
                     audioUrl: res.audioUrl
                 };
                 
-                
-                <Person 
-                    {...users.displayName}
-                    {...users.skills}
-                    {...users.lookingFor}
-                    {...users.imageUrl}
-                    {...users.audioUrl}
-                />
-        
+                return(   
+                    <Person 
+                        {...users.displayName}
+                        {...users.skills}
+                        {...users.lookingFor}
+                        {...users.imageUrl}
+                        {...users.audioUrl}
+                    />
+                )
             }
 
         }

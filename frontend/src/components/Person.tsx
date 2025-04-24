@@ -6,11 +6,16 @@ import Col from 'react-bootstrap/Col';
 import Stack  from 'react-bootstrap/Stack';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Image from '../assets/fake_person.png';
 
 
-function Person({ name = "John Doe", experienceTags = [], lookingforTags = [] })
+
+
+function Person({name, experienceTags, lookingforTags, imageUrl })
 {
+    import('./assets' + imageUrl).then(imageModule => {
+        
+      });
+
     function parseTags(e : string[])
     {
         let tagList : any[] = [];
@@ -26,7 +31,7 @@ function Person({ name = "John Doe", experienceTags = [], lookingforTags = [] })
     return (
     <Col>
         <Card style={{width: '20rem'}} data-bs-theme='dark'>
-            <Card.Img variant='top' src={Image} />
+            <Card.Img variant='top' src={imageModule} />
             <Card.Body>
                 <Stack>
                     <Card.Title>

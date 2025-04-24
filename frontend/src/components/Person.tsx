@@ -27,17 +27,29 @@ function Person(props: Props)
 
         for (let i = 0; i < e.length; i++)
         {
-            tagList.push(<Button style={{flex: '0 0 auto'}}>{e[i]}</Button>);
+            tagList.push(<Button style={{flex: '0 0 auto', }} key={i}>{e[i]}</Button>);
         }
 
         return tagList;
     }
-    console.log('../assets/' + props.imageUrl)
+    
+    var imgPath = props.imageUrl;
+
+    if (imgPath !== "")
+    {
+        imgPath = "http://localhost:3000/files/" + imgPath.split("files/")[1];
+    }
+    else
+    {
+        imgPath = "holder.js/200px200";
+    }
+
+    console.log(props.imageUrl);
 
     return (
     <Col>
         <Card style={{width: '20rem'}} data-bs-theme='dark'>
-            <Card.Img variant='top' src={'../assets/' + props.imageUrl} />
+            <Card.Img variant='top' src={imgPath} />
             <Card.ImgOverlay className= "justify-content-flex-end" ><Button style={{width: '15%', borderRadius: 100, backgroundColor: 'grey'}}>&#9658;</Button></Card.ImgOverlay>
             <Card.Body>
                 <Stack>

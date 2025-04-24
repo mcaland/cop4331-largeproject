@@ -14,11 +14,12 @@ function Me()
     var displayName = ud.displayName;
     var experienceTags = ud.skills;
     var wantedTags = ud.lookingFor;
+    var imgPath = ud.imageUrl;
 
     return (
         <Container>
             <Navigation />
-            <Profile name={displayName} experience={experienceTags} lookingfor={wantedTags} />
+            <Profile name={displayName} experience={experienceTags} lookingfor={wantedTags} imgPath={imgPath} />
             <Button style={{width: '100%'}}>Edit profile</Button>
         </Container>
     );

@@ -18,6 +18,71 @@ function ProfileSetup()
     const max_pages = 3;
     const [current_page, setPage] = React.useState(1);
 
+    React.useEffect(() => {handleExperienceTags();}, [experienceTags]);
+
+    var _ud = localStorage.getItem('user_data');
+    if (_ud == null) _ud = '';
+    var ud = JSON.parse(_ud);
+    var id = ud.userID;
+
+    async function handleExperienceTags() : Promise<void>
+    {
+        var obj = { userID: id, skills: experienceTags };
+        var js = JSON.stringify(obj);
+
+        try
+        {
+            const response = await fetch('http://localhost:5000/api/auth/updateUser', {method: 'POST', body: js, headers: {'Content-Type': 'application/json'}});
+
+            var res = JSON.parse(await response.text());
+
+            if (res.error != null)
+            {
+                //updateErrorMessage(res.error);
+            }
+            else
+            {
+                //updateAlert(<Alert variant='success'>{res.message}</Alert>);
+                
+                // TODO: update cookies
+            }
+        }
+        catch (error : any)
+        {
+            //updateErrorMessage(error.toString());
+            return;
+        }
+    }
+
+    const handlePhotoUpload = async (e : any) =>
+    {
+        const file = e.target.files[0];
+        const formData = new FormData();
+
+        formData.append("userID", id);
+        formData.append(id + "." + file.name.split(".")[1], file);
+        
+        const response = await fetch('http://localhost:5000/api/auth/imageUpload',
+            {
+                method: 'POST',
+                body: formData
+            });
+
+        const json = await response.json();
+
+        console.log(json);
+    }
+
+    const handleAudioUpload = async (e : any) =>
+    {
+        const file = e.target.files[0];
+        const formData = new FormData();
+
+        //const response = await fetch();
+
+        //formData.append(file.);
+    }
+
     function returnPage(e : number)
     {
         if (e == 1)
@@ -30,7 +95,7 @@ function ProfileSetup()
                     </Form.Group>
                     <Form.Group>
                         <Form.Label>Profile Audio</Form.Label>
-                        <Form.Control type='file' name='file' onChange={handlePhotoUpload} />
+                        <Form.Control type='file' name='file' onChange={handleAudioUpload} />
                     </Form.Group>
                 </>
             );
@@ -88,11 +153,6 @@ function ProfileSetup()
                 </>
             );
         }
-    }
-
-    function handlePhotoUpload(e : any)
-    {
-
     }
 
     return (

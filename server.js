@@ -5,7 +5,7 @@ const dotenv = require('dotenv');
 const mongoose = require('mongoose');
 const authRoutes = require('./backend/routes/auth'); 
 
-dotenv.config({ path: './backend/.env' });
+dotenv.config({ path: '.env' });
 
 console.log("Loaded MONGO_URI:", process.env.MONGO_URI);
 

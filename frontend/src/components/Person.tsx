@@ -14,8 +14,12 @@ interface Props {
   }
 
 
-function Person({ name, experienceTags, lookingforTags, imageUrl, audioUrl })
+function Person({ name, experienceTags, lookingforTags, imageUrl, audioUrl, userID })
 {
+    var _ud = localStorage.getItem('user_data');
+    if (_ud == null) _ud = '';
+    var ud = JSON.parse(_ud);
+    var userID = ud.userID;
 
 
     function parseTags(e : string[])
@@ -41,6 +45,34 @@ function Person({ name, experienceTags, lookingforTags, imageUrl, audioUrl })
         imgPath = "holder.js/200px200";
     }
 
+    async function markInterested(e : any) : Promise<void>
+    {
+        var obj = {userId: userID, targetUserId: e};
+        var js = JSON.stringify(obj);
+
+        try
+        {
+            const response = await fetch('https://largeproject.maudxd.online/api/auth/interested', {method: 'POST', body: js, headers: {'Content-Type': 'application/json'}});
+
+            var res = JSON.parse(await response.text());
+
+            if (res.error != null)
+            {
+                //updateErrorMessage(res.error);
+            }
+            else
+            {
+                console.log("success!");
+                
+            }
+        }
+        catch (error : any)
+        {
+            //updateErrorMessage(error.toString());
+            return;
+        }
+    }
+
     return (
     <Col>
         <Card style={{width: '20rem'}} data-bs-theme='dark'>
@@ -63,7 +95,7 @@ function Person({ name, experienceTags, lookingforTags, imageUrl, audioUrl })
                     <Stack direction='horizontal' style={{overflowX: "scroll", overflowY: 'hidden', width: '100%', display: 'flex', gap: '5px', paddingBottom: '5px'}}>
                         {parseTags(experienceTags)}
                     </Stack>
-                    <Button>Interested</Button>
+                    <Button onClick={() => {markInterested(userID)}}>Interested</Button>
                 </Stack>
             </Card.Body>
         </Card>
